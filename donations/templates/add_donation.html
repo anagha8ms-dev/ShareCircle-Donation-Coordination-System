@@ -1,0 +1,517 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Donation | ShareCircle</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        
+
+       body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            
+        background:
+            linear-gradient(
+                    135deg,
+                    rgba(0, 105, 92, 0.35),
+                    rgba(0, 137, 123, 0.30)
+            ),
+            url(/static/images/b2.png);
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: #241c18;
+        }
+
+
+        
+
+        .navbar {
+            width: 100%;
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 48px;
+
+            background: rgba(245, 240, 225, 0.38);
+
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.35);
+
+            box-shadow:
+                0 4px 18px rgba(40, 30, 20, 0.18);
+
+            position: relative;
+            z-index: 10;
+        }
+
+
+        .logo {
+            color: #241c18;
+
+            font-size: 25px;
+            font-weight: bold;
+
+            text-shadow:
+                0 1px 3px rgba(255,255,255,0.4);
+        }
+
+
+        .nav-links {
+            margin-left: auto;
+
+            display: flex;
+            gap: 8px;
+        }
+
+
+        .nav-links a {
+            color: #241c18;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            padding: 10px 17px;
+
+            border-radius: 9px;
+
+            transition: 0.3s;
+        }
+
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.35);
+
+            transform: translateY(-1px);
+        }
+
+
+       
+
+        .add-donation-container {
+
+            min-height: calc(100vh - 72px);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 35px 20px;
+        }
+
+
+
+        .donation-card {
+                width: 100%;
+                max-width: 650px;
+
+                padding: 38px 45px;
+
+                background: rgba(255, 255, 255, 0.28);
+
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+
+                border: 1px solid rgba(255, 255, 255, 0.45);
+
+                border-radius: 24px;
+
+                box-shadow:
+                    0 20px 55px rgba(0, 0, 0, 0.22);
+}
+
+
+        .small-title {
+
+            text-align: center;
+
+            color: #6b513e;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 9px;
+        }
+
+
+        .donation-card h1 {
+
+            text-align: center;
+
+            color: #241c18;
+
+            font-size: 34px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .donation-card > p {
+
+            text-align: center;
+
+            color: #65584f;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            margin-bottom: 25px;
+        }
+
+
+        
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            color: #30231d;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+
+        
+
+        .form-group input,
+        .form-group select {
+
+            width: 100%;
+
+            padding: 12px 14px;
+
+            border:
+                1px solid rgba(105, 78, 58, 0.30);
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,0.68);
+
+            color: #2c211c;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.25s;
+        }
+
+
+        .form-group input::placeholder {
+            color: #8a7d73;
+        }
+
+
+        .form-group input:focus,
+        .form-group select:focus {
+
+            border-color: #6b513e;
+
+            background:
+                rgba(255,255,255,0.90);
+
+            box-shadow:
+                0 0 0 3px rgba(107,81,62,0.12);
+        }
+
+
+       
+
+        .form-group input[type="file"] {
+
+            padding: 9px 10px;
+
+            cursor: pointer;
+        }
+
+
+
+        .donate-btn {
+
+            width: 100%;
+
+            padding: 14px;
+
+            margin-top: 7px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background: #65483b;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 6px 16px rgba(75, 50, 35, 0.25);
+
+            transition: 0.3s;
+        }
+
+
+        .donate-btn:hover {
+
+            background: #4f382e;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 9px 20px rgba(60, 40, 28, 0.30);
+        }
+
+
+
+        .back-btn {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #65483b;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+
+        .back-btn:hover {
+
+            color: #3f2d25;
+
+            text-decoration: underline;
+        }
+
+
+        
+        @media (max-width: 600px) {
+
+            .navbar {
+                height: 65px;
+                padding: 0 18px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+                padding: 8px 10px;
+            }
+
+            .add-donation-container {
+                padding: 25px 15px;
+            }
+
+            .donation-card {
+                padding: 30px 22px;
+                border-radius: 20px;
+            }
+
+            .donation-card h1 {
+                font-size: 29px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body class="add-donation-page">
+
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <div class="logo">
+             ShareCircle
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{% url 'donor_dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'logout' %}">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Main Section -->
+    <div class="add-donation-container">
+
+        <div class="donation-card">
+
+            <div class="small-title">
+                SHARE • CARE • CONNECT
+            </div>
+
+            <h1>Add Donation</h1>
+
+            <p>
+                <i>
+                    Share something you no longer need and make a difference.
+                </i>
+            </p>
+
+
+            <!-- Donation Form -->
+
+            <form method="POST" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+
+                    <label>Item Name</label>
+
+                    <input type="text" name="title">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Category</label>
+
+                    <select name="category">
+
+                        <option value="">Select Category</option>
+
+                        <option value="Clothes">
+                            Clothes
+                        </option>
+
+                        <option value="Books">
+                            Books
+                        </option>
+
+                        <option value="Furniture">
+                            Furniture
+                        </option>
+
+                        <option value="Toys">
+                            Toys
+                        </option>
+
+                        <option value="Household Items">
+                            Household Items
+                        </option>
+
+                        <option value="Others">
+                            Others
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Description</label>
+
+                    <input type="text" name="description">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Image</label>
+
+                    <input type="file" name="image">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Condition</label>
+
+                    <input type="text" name="condition">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Location</label>
+
+                    <input type="text" name="location">
+
+                </div>
+
+
+                <button type="submit" class="donate-btn">
+                    Add Donation
+                </button>
+
+            </form>
+
+
+            <a href="{% url 'donor_dashboard' %}"
+               class="back-btn">
+
+                ← Back to Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

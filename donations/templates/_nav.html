@@ -1,0 +1,19 @@
+{% load static %}
+<nav class="site-nav">
+  <a class="brand" href="{% if request.user.is_authenticated %}{% if request.user.profile.role == 'Donor' %}{% url 'donor_dashboard' %}{% else %}{% url 'recipient_dashboard' %}{% endif %}{% else %}{% url 'login' %}{% endif %}">♡ Share<span>Circle</span></a>
+  {% if request.user.is_authenticated %}
+  <div class="nav-links">
+    {% if request.user.profile.role == 'Donor' %}
+      <a href="{% url 'donor_dashboard' %}">Dashboard</a>
+      <a href="{% url 'add_donation' %}">Add Donation</a>
+      <a href="{% url 'donation_list' %}">My Donations</a>
+      <a href="{% url 'donation_requests' %}">Requests</a>
+    {% else %}
+      <a href="{% url 'recipient_dashboard' %}">Dashboard</a>
+      <a href="{% url 'donation_list' %}">Available Donations</a>
+      <a href="{% url 'my_requests' %}">My Requests</a>
+    {% endif %}
+    <a class="nav-logout" href="{% url 'logout' %}">Logout</a>
+  </div>
+  {% endif %}
+</nav>

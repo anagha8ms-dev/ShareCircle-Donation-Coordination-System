@@ -1,0 +1,436 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShareCircle - Recipient Dashboard</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =========================
+           BODY
+        ========================= */
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            
+        background:
+            linear-gradient(
+                    135deg,
+                    rgba(0, 105, 92, 0.35),
+                    rgba(0, 137, 123, 0.30)
+            ),
+            url(/static/images/b1.jpeg);
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: #241c18;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .recipient-navbar {
+
+            width: 100%;
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 45px;
+
+            background: rgba(255, 255, 255, 0.18);
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.35);
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.15);
+
+            position: relative;
+            z-index: 2;
+        }
+
+
+        /* =========================
+           LOGO
+        ========================= */
+
+        .logo {
+
+            color: #060200;
+
+            font-size: 25px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           LOGOUT GLASS BUTTON
+        ========================= */
+
+        .nav-logout {
+
+            margin-left: auto;
+
+            padding: 10px 22px;
+
+            text-decoration: none;
+
+            color: #070100;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            background:
+                rgba(255, 255, 255, 0.35);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.65);
+
+            border-radius: 10px;
+
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+
+            box-shadow:
+                0 4px 12px rgba(60, 40, 30, 0.12);
+
+            transition: 0.3s;
+        }
+
+
+        .nav-logout:hover {
+
+            background:
+                rgba(255, 255, 255, 0.60);
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 7px 18px rgba(60, 40, 30, 0.20);
+        }
+
+
+        /* =========================
+           MAIN CONTENT
+        ========================= */
+
+        .recipient-content {
+
+            min-height:
+                calc(100vh - 72px);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 40px 20px;
+
+            position: relative;
+
+            z-index: 1;
+        }
+
+
+        /* =========================
+           GLASS CARD
+        ========================= */
+
+        .recipient-card {
+
+            width: 100%;
+
+            max-width: 700px;
+
+            padding: 50px;
+
+            text-align: center;
+
+            background:
+                rgba(255, 255, 255, 0.45);
+
+            backdrop-filter: blur(17px);
+            -webkit-backdrop-filter: blur(17px);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.65);
+
+            border-top:
+                4px solid rgba(255, 255, 255, 0.80);
+
+            border-radius: 27px;
+
+            box-shadow:
+                0 25px 60px rgba(50, 30, 20, 0.25);
+        }
+
+
+        /* =========================
+           SMALL TITLE
+        ========================= */
+
+        .small-title {
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            letter-spacing: 3px;
+
+            color: #0a0200;
+
+            margin-bottom: 14px;
+        }
+
+
+        /* =========================
+           HEADING
+        ========================= */
+
+        .recipient-card h1 {
+
+            font-size: 38px;
+
+            color: #0f0501;
+
+            margin-bottom: 12px;
+        }
+
+
+        /* =========================
+           SUBTITLE
+        ========================= */
+
+        .dashboard-subtitle {
+
+            font-size: 15px;
+
+            line-height: 1.6;
+
+            color: #070707;
+
+            margin-bottom: 32px;
+        }
+
+
+        /* =========================
+           DASHBOARD BUTTONS
+        ========================= */
+
+        .recipient-buttons {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 18px;
+
+            max-width: 520px;
+
+            margin: 0 auto;
+        }
+
+
+        .recipient-btn {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 58px;
+
+            padding: 14px 20px;
+
+            text-decoration: none;
+
+            color: white;
+
+            background: #6D4C41;
+
+            border-radius: 11px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            box-shadow:
+                0 6px 16px rgba(78, 52, 46, 0.25);
+
+            transition: 0.3s;
+        }
+
+
+        .recipient-btn:hover {
+
+            background: #5D4037;
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 9px 20px rgba(78, 52, 46, 0.30);
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .recipient-navbar {
+
+                height: 65px;
+
+                padding: 0 18px;
+            }
+
+
+            .logo {
+
+                font-size: 21px;
+            }
+
+
+            .nav-logout {
+
+                padding: 8px 15px;
+
+                font-size: 12px;
+            }
+
+
+            .recipient-content {
+
+                padding: 25px 15px;
+            }
+
+
+            .recipient-card {
+
+                padding: 38px 22px;
+
+                border-radius: 22px;
+            }
+
+
+            .recipient-card h1 {
+
+                font-size: 29px;
+            }
+
+
+            .recipient-buttons {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+   
+
+    <nav class="recipient-navbar">
+
+        <div class="logo">
+             ShareCircle
+        </div>
+
+
+        <a href="{% url 'logout' %}" class="nav-logout">
+            Logout
+        </a>
+
+    </nav>
+
+
+
+    
+
+    <main class="recipient-content">
+
+        <div class="recipient-card">
+
+
+            <p class="small-title">
+                SHARE • CARE • CONNECT
+            </p>
+
+
+            <h1>
+                Welcome, Recipient!
+            </h1>
+
+
+            <p class="dashboard-subtitle">
+                Find what you need and connect with
+                generous donors.
+            </p>
+
+
+           
+
+            <div class="recipient-buttons">
+
+
+                <a href="{% url 'donation_list' %}"
+                   class="recipient-btn">
+
+                    Browse Donations
+
+                </a>
+
+
+                <a href="{% url 'my_requests' %}"
+                   class="recipient-btn">
+
+                    My Requests
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+</body>
+
+</html>

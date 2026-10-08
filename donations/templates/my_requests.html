@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Requests | ShareCircle</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            
+        background:
+            linear-gradient(
+                    135deg,
+                    rgba(0, 105, 92, 0.35),
+                    rgba(0, 137, 123, 0.30)
+            ),
+            url(/static/images/b2.png);
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: #241c18;
+        }
+
+        
+
+        .navbar {
+            width: 100%;
+            height: 78px;
+
+            padding: 0 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(255, 248, 240, 0.25);
+
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo {
+            color: #0f0401;
+
+            font-size: 25px;
+            font-weight: bold;
+
+            letter-spacing: 0.3px;
+        }
+
+        .logout-btn {
+            text-decoration: none;
+
+            color: #0a0300;
+
+            background: rgba(255, 255, 255, 0.42);
+
+            border: 1px solid rgba(255, 255, 255, 0.65);
+
+            padding: 10px 25px;
+
+            border-radius: 12px;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            transition: 0.3s ease;
+
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.65);
+
+            transform: translateY(-2px);
+        }
+
+        
+
+        h1 {
+            text-align: center;
+
+            color: #090909;
+
+            font-size: 38px;
+
+            margin-top: 55px;
+            margin-bottom: 40px;
+
+            letter-spacing: 1px;
+
+            text-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        h1::after {
+            content: "SHARE • CARE • CONNECT";
+
+            display: block;
+
+            margin-top: 10px;
+
+            font-size: 12px;
+            font-weight: normal;
+
+            letter-spacing: 4px;
+
+            color: rgba(9, 5, 1, 0.72);
+        }
+
+        
+        .request-card {
+            width: 90%;
+            max-width: 850px;
+
+            margin: 0 auto 25px;
+
+            padding: 28px 30px;
+
+            background: rgba(255, 248, 240, 0.20);
+
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+
+            border: 1px solid rgba(255, 255, 255, 0.34);
+
+            border-radius: 23px;
+
+            box-shadow:
+                0 20px 50px rgba(15, 7, 4, 0.30);
+
+            transition: 0.3s ease;
+        }
+
+        .request-card:hover {
+            transform: translateY(-4px);
+
+            background: rgba(255, 248, 240, 0.25);
+
+            box-shadow:
+                0 25px 55px rgba(15, 7, 4, 0.38);
+        }
+
+        .request-card h2 {
+            color: #0b0b0b;
+
+            font-size: 24px;
+
+            margin-bottom: 20px;
+
+            text-shadow:
+                0 3px 10px rgba(0, 0, 0, 0.20);
+        }
+
+        .request-card p {
+            margin: 12px 0;
+
+            padding: 13px 16px;
+
+            color: #0c0c0c;
+
+            font-size: 15px;
+
+            background: rgba(255, 255, 255, 0.10);
+
+            border: 1px solid rgba(255, 255, 255, 0.16);
+
+            border-radius: 12px;
+        }
+
+        .request-card strong {
+            color: #0f0f0f;
+        }
+
+        hr {
+            display: none;
+        }
+
+        
+
+        .empty-message {
+            width: 90%;
+            max-width: 600px;
+
+            margin: 60px auto;
+
+            padding: 25px;
+
+            text-align: center;
+
+            color: #080808;
+
+            background: rgba(255, 248, 240, 0.18);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            border: 1px solid rgba(255, 255, 255, 0.30);
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 15px 40px rgba(15, 7, 4, 0.25);
+        }
+
+        
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                height: 70px;
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .logout-btn {
+                padding: 8px 17px;
+                font-size: 13px;
+            }
+
+            h1 {
+                font-size: 30px;
+                margin-top: 40px;
+            }
+
+            h1::after {
+                font-size: 9px;
+                letter-spacing: 2px;
+            }
+
+            .request-card {
+                width: 94%;
+                padding: 22px 18px;
+            }
+
+            .request-card h2 {
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    
+
+    <nav class="navbar">
+
+        <div class="logo">
+             ShareCircle
+        </div>
+
+        <a href="{% url 'logout' %}"
+           class="logout-btn">
+            Logout
+        </a>
+
+    </nav>
+
+
+    <h1>My Requests</h1>
+
+
+    {% for req in requests %}
+
+        <div class="request-card">
+
+            <h2>{{ req.donation.title }}</h2>
+
+            <p>
+                <strong>Category:</strong>
+                {{ req.donation.category }}
+            </p>
+
+            <p>
+                <strong>Donor:</strong>
+                {{ req.donation.donor.username }}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                {{ req.status }}
+            </p>
+
+        </div>
+
+        <hr>
+
+    {% empty %}
+
+        <p class="empty-message">
+            You have not requested any donations yet.
+        </p>
+
+    {% endfor %}
+
+</body>
+</html>

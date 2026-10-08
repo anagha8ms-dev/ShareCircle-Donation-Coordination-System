@@ -1,0 +1,692 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Donation Requests | ShareCircle</title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <style>
+
+       
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            
+        background:
+            linear-gradient(
+                    135deg,
+                    rgba(0, 105, 92, 0.35),
+                    rgba(0, 137, 123, 0.30)
+            ),
+            url(/static/images/b2.png);
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: #241c18;
+        }
+
+
+       
+
+        .requests-page .navbar {
+           position: relative;
+
+            z-index: 2;
+
+            width: 100%;
+
+            padding: 18px 45px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 25px;
+
+            background: rgba(255, 255, 255, 0.16);
+
+            backdrop-filter: blur(14px);
+
+            -webkit-backdrop-filter: blur(14px);
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.30);
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .requests-page .logo {
+             font-size: 25px;
+
+            font-weight: bold;
+
+            color: rgb(15, 1, 1);
+
+            margin-right: auto;
+
+            text-shadow:
+                0 2px 5px rgba(0, 0, 0, 0.20);
+        }
+
+
+        
+
+
+        .requests-page .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 25px;
+        }
+
+
+        .requests-page .nav-links a {
+            text-decoration: none;
+
+            color: rgb(14, 1, 1);
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            padding: 9px 17px;
+
+            border-radius: 8px;
+
+            transition: 0.3s;
+        }
+
+
+
+        .requests-page .nav-links a:hover {
+             background: rgba(255, 255, 255, 0.20);
+
+            transform: translateY(-1px);
+        }
+
+       
+
+        .requests-container {
+            width: 100%;
+
+            max-width: 1100px;
+
+            margin: 0 auto;
+
+            padding: 50px 25px;
+        }
+
+
+        
+        .page-heading {
+            text-align: center;
+
+            margin-bottom: 40px;
+        }
+
+
+        .small-title {
+            color: #0b0401;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .page-heading h1 {
+            margin: 0;
+
+            color: #090909;
+
+            font-size: 34px;
+
+            font-weight: bold;
+        }
+
+
+        .page-heading p {
+            margin-top: 12px;
+
+            color: #070707;
+
+            font-size: 15px;
+        }
+
+
+        
+
+        .requests-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 25px;
+        }
+
+
+       
+
+        .request-card {
+            background: #FFFFFF;
+
+            border: 1px solid #E8DED5;
+
+            border-radius: 16px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 8px 25px rgba(62, 42, 34, 0.08);
+
+            transition: 0.25s;
+
+            overflow: hidden;
+        }
+
+
+        .request-card:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 12px 30px rgba(62, 42, 34, 0.12);
+        }
+
+
+       
+
+        
+
+        .request-card h2 {
+            margin: 0 0 20px;
+
+            color: #060606;
+
+            font-size: 22px;
+        }
+
+
+        
+
+        .request-card p {
+            margin: 9px 0;
+
+            padding: 10px 12px;
+
+            background: #F7F3EF;
+
+            border: 1px solid #E8DED5;
+
+            border-radius: 8px;
+
+            color: #090909;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        .request-card p strong {
+            color: #3E2A22;
+        }
+
+
+        
+        .status {
+            display: inline-block;
+
+            margin-left: 5px;
+
+            padding: 4px 10px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+
+        /* Pending */
+
+        .status.pending {
+            background: #FFF4DD;
+
+            color: #8A641E;
+        }
+
+
+        /* Accepted */
+
+        .status.accepted {
+            background: #E8F4EA;
+
+            color: #397047;
+        }
+
+
+        /* Rejected */
+
+        .status.rejected {
+            background: #F9E8E6;
+
+            color: #9A493F;
+        }
+
+
+
+        .request-buttons {
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 20px;
+        }
+
+
+        .request-buttons a {
+            text-decoration: none;
+        }
+
+
+        .request-buttons button {
+            border: none;
+
+            border-radius: 8px;
+
+            padding: 10px 20px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        
+
+        .accept-btn {
+            background: #65483B;
+
+            color: #FFFFFF;
+        }
+
+
+        .accept-btn:hover {
+            background: #4F382E;
+
+            transform: translateY(-1px);
+        }
+
+
+        .reject-btn {
+            background: #F1E8E2;
+
+            color: #65483B;
+
+            border: 1px solid #DCCDC3 !important;
+        }
+
+
+        .reject-btn:hover {
+            background: #E6D8CF;
+
+            transform: translateY(-1px);
+        }
+
+
+       
+
+        .empty-box {
+            grid-column: 1 / -1;
+
+            max-width: 600px;
+
+            width: 100%;
+
+            margin: 30px auto;
+
+            padding: 45px 30px;
+
+            text-align: center;
+
+            background: #FFFFFF;
+
+            border: 1px solid #E8DED5;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 8px 25px rgba(62, 42, 34, 0.08);
+        }
+
+
+        .empty-icon {
+            width: 55px;
+            height: 55px;
+
+            margin: 0 auto 18px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #F7F3EF;
+
+            color: #65483B;
+
+            font-size: 25px;
+
+            border: 1px solid #E8DED5;
+        }
+
+
+        .empty-box h2 {
+            margin-bottom: 10px;
+
+            color: #3E2A22;
+
+            font-size: 23px;
+        }
+
+
+        .empty-box p {
+            margin-bottom: 25px;
+
+            color: #756D68;
+
+            font-size: 14px;
+        }
+
+
+         
+
+        .back-btn {
+            display: inline-block;
+
+            padding: 11px 20px;
+
+            background: #65483B;
+
+            color: #FFFFFF;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            transition: 0.25s;
+        }
+
+
+        .back-btn:hover {
+            background: #4F382E;
+
+            transform: translateY(-1px);
+        }
+
+
+       
+
+        @media (max-width: 750px) {
+
+            .requests-page .navbar {
+                padding: 16px 20px;
+            }
+
+
+            .requests-page .logo {
+                font-size: 19px;
+            }
+
+
+            .requests-page .nav-links {
+                gap: 15px;
+            }
+
+
+            .requests-container {
+                padding: 35px 15px;
+            }
+
+
+            .page-heading h1 {
+                font-size: 28px;
+            }
+
+
+            .requests-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .request-card {
+                padding: 22px;
+            }
+
+
+            .request-buttons {
+                flex-direction: column;
+            }
+
+
+            .request-buttons a {
+                width: 100%;
+            }
+
+
+            .request-buttons button {
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body class="requests-page">
+
+
+   
+
+    <nav class="navbar">
+
+        <div class="logo">
+             ShareCircle
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="{% url 'donor_dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'logout' %}">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Main Content -->
+
+    <div class="requests-container">
+
+
+        <!-- Page Heading -->
+
+        <div class="page-heading">
+
+            <div class="small-title">
+                SHARE • CARE • CONNECT
+            </div>
+
+
+            <h1>
+                Donation Requests
+            </h1>
+
+
+            <p>
+                Manage requests from people who need your donated items.
+            </p>
+
+        </div>
+
+
+        <!-- Requests -->
+
+        <div class="requests-grid">
+
+
+            {% for req in requests %}
+
+
+                <!-- Request Card -->
+
+                <div class="request-card">
+
+
+                    <div class="request-icon">
+                        
+                    </div>
+
+
+                    <h2>
+                        {{ req.donation.title }}
+                    </h2>
+
+
+                    <p>
+                        <strong>Requested By:</strong>
+                        {{ req.recipient.username }}
+                    </p>
+
+
+                    <p>
+                        <strong>Category:</strong>
+                        {{ req.donation.category }}
+                    </p>
+
+
+                    <p>
+
+                        <strong>Status:</strong>
+
+                        <span class="status {{ req.status|lower }}">
+                            {{ req.status }}
+                        </span>
+
+                    </p>
+
+
+                    {% if req.status == "Pending" %}
+
+
+                        <div class="request-buttons">
+
+
+                            <a href="{% url 'accept_request' req.id %}">
+
+                                <button class="accept-btn">
+                                    ✓ Accept
+                                </button>
+
+                            </a>
+
+
+                            <a href="{% url 'reject_request' req.id %}">
+
+                                <button class="reject-btn">
+                                    ✕ Reject
+                                </button>
+
+                            </a>
+
+
+                        </div>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+            {% empty %}
+
+
+                <!-- Empty State -->
+
+                <div class="empty-box">
+
+
+                    <div class="empty-icon">
+                        
+                    </div>
+
+
+                    <h2>
+                        No Donation Requests Yet
+                    </h2>
+
+
+                    <p>
+                        You don't have any requests for your donations yet.
+                    </p>
+
+
+                    <a href="{% url 'donor_dashboard' %}" class="back-btn">
+                        ← Back to Dashboard
+                    </a>
+
+
+                </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+</html>
