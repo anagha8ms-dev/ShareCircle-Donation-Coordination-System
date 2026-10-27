@@ -77,8 +77,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sharecircle',
-        'USER':'root',
-        'PASSWORD':'anagha',
+        'USER':'',
+        'PASSWORD':'',
         'HOST':'localhost',
         'PORT':3306
     }
